@@ -1,0 +1,34 @@
+header.header.py-3
+  .container
+    .row.align-items-center
+
+      // Logo
+      .col-3
+        .inner-logo
+          a(href="/")
+            img(src="/client/images/logo.jpg", alt="Logo", height="40")
+
+      // Menu
+      .col-9
+        .inner-menu.d-flex.justify-content-end.align-items-center
+
+          ul.d-flex.list-unstyled.mb-0.me-4
+            li.me-4
+              a(href="/") Trang chủ
+            li.me-4
+              a(href="/topics") Chủ đề
+            li.me-4
+              a(href="/songs") Bài hát
+            li.me-4
+              a(href="/albums") Album
+            li
+              a(href="/artists") Nghệ sĩ
+
+          //- // Search
+          //- form.d-flex(action="/search", method="GET")
+          //-   input.form-control.me-2(
+          //-     type="text",
+          //-     name="keyword",
+          //-     placeholder="Tìm bài hát..."
+          //-   )
+          //-   button.btn.btn-primary(type="submit") Tìm

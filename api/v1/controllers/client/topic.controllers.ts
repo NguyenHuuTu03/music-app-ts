@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import Topic from "../../../../models/topic.model";
 
+// [GET] /topics
 export const index = async (req: Request, res: Response) => {
-  const topic = await Topic.find({
+  const topics = await Topic.find({
     deleted: false,
   });
   res.render("client/pages/topics/index", {
-    pageTitle: "Danh sách bài hát",
+    pageTitle: "Trang chủ đề bài hát",
+    topics: topics,
   });
 };
