@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Chuyển code TS sang JavaScript phiên bản ES6
+    "module": "CommonJS", // CommonJS là tiêu chuẩn được sử dụng trong Node.js để làm việc với các module
+    // "rootDir": "./src", // Thư mục chứa code TypeScript gốc
+    "outDir": "dist", // Thư mục xuất file JavaScript sau khi biên dịch
+    "strict": true, // Bật chế độ kiểm tra chặt chẽ
+    "esModuleInterop": true, // Cho phép import thư viện dễ hơn thay cho require
+    "skipLibCheck": true, // Bỏ qua kiểm tra lỗi trong thư viện (node_modules)
+    "forceConsistentCasingInFileNames": true, // Tránh lỗi viết sai hoa/thường trong tên file
+    "removeComments": true // Xóa comment khi biên dịch sang JS (giảm dung lượng file)
+  }
+}
