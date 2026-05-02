@@ -19,6 +19,7 @@ export const list = async (req: Request, res: Response) => {
   for (const song of songs as any[]) {
     const infoSinger = await Singer.findOne({
       _id: song.singerId,
+      status: "active",
       deleted: false,
     })
       .select("fullName avatar")
@@ -28,5 +29,29 @@ export const list = async (req: Request, res: Response) => {
   res.render("client/pages/songs/list", {
     pageTitle: topic?.title,
     songs: songs,
+  });
+};
+
+// [GET] /songs/detail/:slugSong
+export const detail = async (req: Request, res: Response) => {
+  const slug = req.params.slugSong;
+  const song = await Song.findOne({
+    slug: slug,
+    status: "active",
+    deleted: false,
+  });
+  const singer = await Singer.findOne({
+    _id: song?.singerId,
+    deleted: false,
+  }).select("fullName avatar");
+  const topic = await Topic.findOne({
+    _id: song?.topicId,
+    deleted: false,
+  }).select("title");
+  res.render("client/pages/songs/detail", {
+    pageTitle: song?.title,
+    song: song,
+    singer: singer,
+    topic: topic,
   });
 };
