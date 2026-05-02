@@ -344,6 +344,13 @@ body {
 .inner-heart {
   cursor: pointer;
 }
+.inner-heart.active {
+  color: #c0392b;
+}
+.inner-heart.active i {
+  font-weight: 900;
+  color: #c0392b;
+}
 
 .inner-heart:hover i {
   color: #c0392b;
