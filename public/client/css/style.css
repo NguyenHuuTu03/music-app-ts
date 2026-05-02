@@ -325,11 +325,22 @@ body {
   color: #555;
 }
 
-.inner-action i {
+/* .inner-action i {
   font-size: 14px;
   color: #e07b2a;
+} */
+.inner-like {
+  cursor: pointer;
 }
-
+.inner-like i {
+  color: #0d6efd;
+}
+.inner-like.active {
+  color: #0d6efd;
+}
+.inner-like.active i {
+  font-weight: 900;
+}
 .inner-heart {
   cursor: pointer;
 }
@@ -360,7 +371,7 @@ body {
   border: 3px solid #e07b2a;
   flex-shrink: 0;
   animation: rotating 8s linear infinite;
-  /* animation-play-state: paused; */
+  animation-play-state: paused;
 }
 
 @keyframes rotating {

@@ -18,9 +18,9 @@ block main
             .inner-action.inner-topic
               i.fa-solid.fa-music
               |  #{topic.title}
-            .inner-action.inner-like
+            .inner-action.inner-like(button-like=song.id)
               i.fa-regular.fa-thumbs-up
-              |  #{song.like} thích
+              span #{song.like} thích
             .inner-action.inner-heart
               i.fa-regular.fa-heart
               |  Bài hát yêu thích

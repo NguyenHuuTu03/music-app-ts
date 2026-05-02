@@ -2,9 +2,8 @@ import mongoose from "mongoose";
 
 const singerSchema = new mongoose.Schema(
   {
-    title: String,
+    fullName: String,
     avatar: String,
-    description: String,
     status: String,
     slug: String,
     deleted: {
