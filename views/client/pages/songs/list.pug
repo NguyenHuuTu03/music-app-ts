@@ -25,7 +25,7 @@ block main
 
               .inner-like
                 i.fa-solid.fa-thumbs-up
-                |  #{song.like}
+                |  #{song.like.length > 0 ? song.like.length : 0}
 
               .inner-time
                 i.fa-regular.fa-clock

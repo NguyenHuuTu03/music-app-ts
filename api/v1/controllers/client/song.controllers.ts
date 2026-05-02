@@ -3,6 +3,7 @@ import Song from "../../../../models/song.model";
 import Topic from "../../../../models/topic.model";
 import Singer from "../../../../models/singer.model";
 import FavoriteSong from "../../../../models/favorite-songs.model";
+import User from "../../../../models/user.model";
 
 // [GET] /songs/:slugSong
 export const list = async (req: Request, res: Response) => {
@@ -53,10 +54,15 @@ export const detail = async (req: Request, res: Response) => {
     .lean();
 
   const favoriteSong = await FavoriteSong.findOne({
-    songId: song?.id,
+    userId: res.locals.user.id,
     deleted: false,
   });
+
   (song as any)["isFavoriteSong"] = favoriteSong ? true : false;
+
+  const userId = song?.like.find((item) => item == res.locals.user.id);
+  (song as any).isLike = userId ? true : false;
+
   res.render("client/pages/songs/detail", {
     pageTitle: song?.title,
     song: song,
@@ -74,20 +80,30 @@ export const like = async (req: Request, res: Response) => {
     deleted: false,
     status: "active",
   });
-  const newLike =
-    typeLike == "like" ? (song?.like || 0) + 1 : (song?.like || 0) - 1;
-  await Song.updateOne(
-    {
-      _id: id,
-    },
-    {
-      like: newLike,
-    },
-  );
+  const userId = song?.like.find((item) => item == res.locals.user.id);
+  if (typeLike == "like") {
+    if (!userId) {
+      await Song.updateOne(
+        {
+          _id: id,
+        },
+        {
+          $push: { like: res.locals.user.id },
+        },
+      );
+    }
+  }
+  if (typeLike == "dislike") {
+    await Song.updateOne({ _id: id }, { $pull: { like: userId } });
+  }
+  const newSong = await Song.findOne({
+    _id: song?.id,
+    deleted: false,
+  });
   res.json({
     code: 200,
     message: "Thành công!",
-    like: newLike,
+    like: newSong?.like.length,
   });
 };
 
@@ -98,12 +114,12 @@ export const favorite = async (req: Request, res: Response) => {
   switch (typeFavorite) {
     case "favorite":
       const exitsFavoriteSong = await FavoriteSong.findOne({
-        songId: id,
+        userId: res.locals.user.id,
         deleted: false,
       });
       if (!exitsFavoriteSong) {
         const record = new FavoriteSong({
-          // userId: "",
+          userId: res.locals.user.id,
           songId: id,
         });
         await record.save();

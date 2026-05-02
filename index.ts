@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import * as database from "./config/database";
 import clientRoutes from "./api/v1/routes/client/index.router";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 const app: Express = express();
 const port: number | string = process.env.PORT || 3002;
@@ -12,6 +14,9 @@ app.use(express.static("public"));
 app.set("views", "./views");
 app.set("view engine", "pug");
 database.connectDB();
+
+app.use(bodyParser.urlencoded());
+app.use(cookieParser());
 
 clientRoutes(app);
 
