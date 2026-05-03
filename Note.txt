@@ -1,0 +1,1 @@
+- npm i unidecode // thư viện bỏ đi các dấu của từ khi tìm kiếm theo slug

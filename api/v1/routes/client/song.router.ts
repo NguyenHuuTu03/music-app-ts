@@ -15,5 +15,6 @@ router.patch(
   authMiddleware.authRequest,
   controller.favorite,
 );
+router.patch("/listen/:songId", controller.listen);
 
 export const songRoutes = router;

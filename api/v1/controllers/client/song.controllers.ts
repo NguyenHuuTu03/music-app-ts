@@ -142,3 +142,31 @@ export const favorite = async (req: Request, res: Response) => {
     message: "Thành công!",
   });
 };
+
+// [PATCH] /listen/:songId
+export const listen = async (req: Request, res: Response) => {
+  const id = req.params.songId;
+  const song = await Song.findOne({
+    _id: id,
+    deleted: false,
+  });
+  const newListen = (song?.listen || 0) + 1;
+  await Song.updateOne(
+    {
+      _id: id,
+    },
+    {
+      listen: newListen,
+    },
+  );
+  const newSong = await Song.findOne({
+    _id: id,
+    deleted: false,
+  });
+
+  res.json({
+    code: 200,
+    message: "Thành công!",
+    listen: newSong?.listen,
+  });
+};
