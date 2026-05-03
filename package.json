@@ -16,13 +16,15 @@
     "express": "^5.2.1",
     "md5": "^2.3.0",
     "mongoose": "^9.6.1",
-    "pug": "^3.0.4"
+    "pug": "^3.0.4",
+    "unidecode": "^1.1.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
     "@types/md5": "^2.3.6",
     "@types/node": "^25.6.0",
+    "@types/unidecode": "^1.1.0",
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
