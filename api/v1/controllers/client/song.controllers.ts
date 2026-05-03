@@ -55,12 +55,13 @@ export const detail = async (req: Request, res: Response) => {
 
   const favoriteSong = await FavoriteSong.findOne({
     userId: res.locals.user.id,
+    songId: song?.id,
     deleted: false,
   });
 
   (song as any)["isFavoriteSong"] = favoriteSong ? true : false;
 
-  const userId = song?.like.find((item) => item == res.locals.user.id);
+  const userId = song?.like.find((item) => item === res.locals.user.id);
   (song as any).isLike = userId ? true : false;
 
   res.render("client/pages/songs/detail", {
@@ -94,7 +95,7 @@ export const like = async (req: Request, res: Response) => {
     }
   }
   if (typeLike == "dislike") {
-    await Song.updateOne({ _id: id }, { $pull: { like: userId } });
+    await Song.updateOne({ _id: id }, { $pull: { like: res.locals.user.id } });
   }
   const newSong = await Song.findOne({
     _id: song?.id,
@@ -115,8 +116,10 @@ export const favorite = async (req: Request, res: Response) => {
     case "favorite":
       const exitsFavoriteSong = await FavoriteSong.findOne({
         userId: res.locals.user.id,
+        songId: id,
         deleted: false,
       });
+
       if (!exitsFavoriteSong) {
         const record = new FavoriteSong({
           userId: res.locals.user.id,
@@ -127,6 +130,7 @@ export const favorite = async (req: Request, res: Response) => {
       break;
     case "unfavorite":
       await FavoriteSong.deleteOne({
+        userId: res.locals.user.id,
         songId: id,
       });
       break;
