@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Song from "../../../../models/song.model";
 import Singer from "../../../../models/singer.model";
-import { convertToSlug } from "../../../../helpers/client/convertToSlug";
+import { convertToSlug } from "../../../../helpers/convertToSlug";
 
 // [GET] /:type
 export const result = async (req: Request, res: Response) => {

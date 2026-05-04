@@ -1,0 +1,21 @@
+aside.adm-sidebar
+  span.sidebar-section Tổng quan
+  a.nav-item(href= prefixAdmin + "/dashboard" class=(activePage==="dashboard"?"active":""))
+    i.bi.bi-speedometer2
+    span Dashboard
+
+  span.sidebar-section Quản lý
+  a.nav-item(href= prefixAdmin + "/songs" class=(activePage==="songs"?"active":""))
+    i.bi.bi-music-note-list
+    span Songs
+  a.nav-item(href= prefixAdmin + "/topics" class=(activePage==="topics"?"active":""))
+    i.bi.bi-tags
+    span Topics
+  a.nav-item(href= prefixAdmin + "/singers" class=(activePage==="singers"?"active":""))
+    i.bi.bi-person-circle
+    span Singers
+
+  .sidebar-footer
+    a.nav-item(href= prefixAdmin + "/auth/logout")
+      i.bi.bi-box-arrow-right
+      span Đăng xuất

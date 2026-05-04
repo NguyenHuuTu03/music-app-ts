@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import md5 from "md5";
 import User from "../../../../models/user.model";
-import * as generateHelpers from "../../../../helpers/client/generate";
+import * as generateHelpers from "../../../../helpers/generate";
 
 // [GET] /users/register
 export const register = (req: Request, res: Response) => {
@@ -62,5 +62,11 @@ export const loginPost = async (req: Request, res: Response) => {
     return;
   }
   res.cookie("tokenUser", exitsEmail.tokenUser);
+  res.redirect("/topics");
+};
+
+// [GET] /users/logout
+export const logout = (req: Request, res: Response) => {
+  res.clearCookie("tokenUser");
   res.redirect("/topics");
 };

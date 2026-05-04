@@ -33,7 +33,7 @@ header.header.py-3
               a(href="/topics") Chủ đề
             li
               a(href="/favorite-songs") Yêu thích
-            if user
+            if(user)
               li
                 a.btn-logout(href="/users/logout")
                   i.fa-solid.fa-right-from-bracket
