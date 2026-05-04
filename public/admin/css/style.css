@@ -970,3 +970,25 @@ audio::-webkit-media-controls-panel {
 }
 
 /* ================================================================================================================== */
+/* Lyrics editor */
+.lyrics-editor {
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  resize: vertical;
+  min-height: 200px;
+}
+
+.lyrics-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.lyrics-hint i {
+  font-size: 12px;
+}
+/* ================================================================================================================== */

@@ -43,11 +43,11 @@ block main
                       i.bi.bi-x-circle-fill
                       |  Dừng hoạt động
                 td.action-cell
-                  a.btn.btn-sm.btn-secondary(href= prefixAdmin + "/songs/detail/" + song.id, title="Chi tiết")
+                  a.btn.btn-sm.btn-secondary(href= prefixAdmin + `/songs/detail/${song._id}`, title="Chi tiết")
                     i.bi.bi-eye
-                  a.btn.btn-sm.btn-secondary(href= prefixAdmin + "/songs/edit/" + song.id, title="Sửa")
+                  a.btn.btn-sm.btn-secondary(href= prefixAdmin + `/songs/edit/${song._id}`, title="Sửa")
                     i.bi.bi-pencil
-                  a.btn.btn-sm.btn-danger(href= prefixAdmin + "/songs/delete/" + song.id, title="Xóa")
+                  a.btn.btn-sm.btn-danger(href= prefixAdmin + `/songs/delete/${song._id}`, title="Xóa")
                     i.bi.bi-trash
           else
             tr

@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser";
 import adminRoutes from "./api/v1/routes/admin/index.router";
 import * as systemConfig from "./config/system";
 import path from "path";
-
+import methodOverride from "method-override";
 const app: Express = express();
 const port: number | string = process.env.PORT || 3002;
 
@@ -22,6 +22,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
 app.locals.prefixAdmin = systemConfig.pathAdmin.prefixAdmin;
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride("_method"));
 
 /* New Route to the TinyMCE Node module */
 app.use(

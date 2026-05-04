@@ -3,13 +3,13 @@ extends ../../layouts/default.pug
 block main
   .page-header
     div
-      h2.inner-title Thêm mới bài hát
+      h2.inner-title Chỉnh sửa bài hát
       p.page-subtitle Điền đầy đủ thông tin bên dưới
-    a.btn.btn-secondary(href= prefixAdmin + "/topics")
+    a.btn.btn-secondary(href= prefixAdmin + "/songs")
       i.bi.bi-arrow-left
       span Quay lại
 
-  form(action= prefixAdmin + "/songs/create" method="POST" enctype="multipart/form-data")
+  form(action= prefixAdmin + `/songs/edit/${song.id}?_method=PATCH` method="POST" enctype="multipart/form-data")
     .form-layout
       //- Cột trái
       .form-left
@@ -28,6 +28,7 @@ block main
                 name="title"
                 placeholder="Nhập tiêu đề bài hát..."
                 required
+                value=song.title
               )
 
             .form-group
@@ -36,7 +37,7 @@ block main
                 option(value="") -- Chọn chủ đề --
                 if topics && topics.length > 0
                   each topic in topics
-                    option(value= topic.id) #{topic.title}
+                    option(value= topic.id selected=topic.id === song.topicId) #{topic.title}
 
             .form-group
               label.form-label(for="singerId") Ca sĩ
@@ -44,7 +45,7 @@ block main
                 option(value="") -- Chọn ca sĩ --
                 if singers && singers.length > 0
                   each singer in singers
-                    option(value= singer.id) #{singer.fullName}
+                    option(value= singer.id selected=singer.id == song.singerId) #{singer.fullName}
 
             .form-group
               label.form-label(for="lyrics")
@@ -55,7 +56,7 @@ block main
                 name="lyrics"
                 rows="10"
                 placeholder="Nhập lời bài hát..."
-              )
+              ) !{song.lyrics}
 
             .form-group
               label.form-label(for="description") Mô tả
@@ -64,7 +65,7 @@ block main
                 name="description"
                 rows="4"
                 placeholder="Nhập mô tả ngắn về bài hát..."
-              )
+              ) !{song.description}
 
       //- Cột phải
       .form-right
@@ -76,8 +77,8 @@ block main
           .card-body
             .form-group
               .upload-area(id="upload-area")
-                img#preview-img(src="" alt="Preview" style="display:none")
-                .upload-placeholder#upload-placeholder
+                img#preview-img(src=song.avatar alt="Preview" )
+                .upload-placeholder#upload-placeholder.d-none
                   i.bi.bi-cloud-upload
                   p Nhấn để chọn ảnh
                   span.upload-hint JPG, PNG — tối đa 5MB
@@ -97,16 +98,16 @@ block main
           .card-body
             .form-group(style="margin-bottom:0")
               .upload-area.audio-upload-area(id="audio-upload-area")
-                .audio-placeholder#audio-placeholder
+                .audio-placeholder#audio-placeholder.d-none
                   i.bi.bi-file-earmark-music
                   p Nhấn để chọn file audio
                   span.upload-hint MP3, WAV, OGG — tối đa 20MB
-                .audio-preview#audio-preview(style="display:none")
+                .audio-preview#audio-preview
                   i.bi.bi-file-earmark-music(style="font-size:24px; color:var(--accent)")
                   .audio-info
                     span#audio-name(style="font-size:13px; font-weight:500; color:var(--text)") 
                     span#audio-size(style="font-size:11px; color:var(--muted)")
-                  audio#audio-player(controls style="width:100%; margin-top:10px")
+                  audio#audio-player(controls src=song.audio style="width:100%; margin-top:10px")
               input(
                 type="file"
                 id="audio"
@@ -124,12 +125,12 @@ block main
             .form-group(style="margin-bottom:0")
               .status-options
                 label.status-option
-                  input(type="radio" name="status" value="active" checked)
+                  input(type="radio" name="status" value="active" checked=song.status == "active")
                   span.status-btn.status-active
                     i.bi.bi-check-circle-fill
                     |  Hoạt động
                 label.status-option
-                  input(type="radio" name="status" value="inactive")
+                  input(type="radio" name="status" value="inactive" checked=song.status == "inactive")
                   span.status-btn.status-inactive
                     i.bi.bi-x-circle-fill
                     |  Dừng hoạt động

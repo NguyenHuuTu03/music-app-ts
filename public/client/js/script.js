@@ -8,12 +8,14 @@ if (aplayer) {
   const singer = JSON.parse(dataSinger);
 
   const ap = new APlayer({
-    container: document.getElementById('aplayer'),
+    container: aplayer,
+    lrcType: 1,
     audio: [{
       name: song.title,
       artist: dataSinger.fullName,
       url: '/client/audio/cat-doi-noi-sau.mp3',
-      cover: song.avatar
+      cover: song.avatar,
+      lrc: song.lyrics
     }],
     autoplay: true
   });
