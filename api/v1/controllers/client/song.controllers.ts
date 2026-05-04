@@ -53,16 +53,17 @@ export const detail = async (req: Request, res: Response) => {
     .select("title")
     .lean();
 
-  const favoriteSong = await FavoriteSong.findOne({
-    userId: res.locals.user.id,
-    songId: song?.id,
-    deleted: false,
-  });
+  if (res.locals.user) {
+    const favoriteSong = await FavoriteSong.findOne({
+      userId: res.locals.user.id,
+      songId: song?.id,
+      deleted: false,
+    });
 
-  (song as any)["isFavoriteSong"] = favoriteSong ? true : false;
-
-  const userId = song?.like.find((item) => item === res.locals.user.id);
-  (song as any).isLike = userId ? true : false;
+    (song as any)["isFavoriteSong"] = favoriteSong ? true : false;
+    const userId = song?.like.find((item) => item === res.locals.user.id);
+    (song as any).isLike = userId ? true : false;
+  }
 
   res.render("client/pages/songs/detail", {
     pageTitle: song?.title,

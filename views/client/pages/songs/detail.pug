@@ -18,13 +18,14 @@ block main
             .inner-action.inner-topic
               i.fa-solid.fa-music
               |  #{topic.title}
-            div(class= "inner-action inner-like " + (song.isLike ? "active" : "") button-like=song.id)
+            div(class= "inner-action inner-like " + (song.isLike ? "active" : "") button-like=song.id data-user=user)
               i.fa-regular.fa-thumbs-up
               span #{song.like.length} thích
+            
             div(class= "inner-action inner-listen ")
               i(class="fa-solid fa-headphones")
               span #{song.listen} lượt
-            div(class="inner-action inner-heart " + (song.isFavoriteSong ? "active" : "") button-favorite=song.id)
+            div(class="inner-action inner-heart " + (song.isFavoriteSong ? "active" : "") button-favorite=song.id data-user=user)
               i.fa-regular.fa-heart
               |  Bài hát yêu thích
 

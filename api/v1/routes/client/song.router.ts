@@ -4,7 +4,7 @@ import * as authMiddleware from "../../../../middleware/client/auth.middleware";
 
 const router: Router = Router();
 router.get("/:slugSong", controller.list);
-router.get("/detail/:slugSong", authMiddleware.authRequest, controller.detail);
+router.get("/detail/:slugSong", controller.detail);
 router.patch(
   "/like/:typeLike/:songId",
   authMiddleware.authRequest,

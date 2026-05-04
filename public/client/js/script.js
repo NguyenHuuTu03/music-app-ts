@@ -49,7 +49,13 @@ if (aplayer) {
 // Button like
 const buttonLike = document.querySelector("[button-like]");
 if (buttonLike) {
+  const isUser = buttonLike.getAttribute("data-user");
   buttonLike.addEventListener("click", () => {
+    if (!isUser) {
+      window.location.href = "/users/login";
+      return;
+    }
+
     const id = buttonLike.getAttribute("button-like");
     const isActive = buttonLike.classList.contains("active");
     const typeLike = isActive ? "dislike" : "like"
@@ -76,6 +82,12 @@ const listFavoriteSong = document.querySelectorAll("[button-favorite]");
 if (listFavoriteSong) {
   listFavoriteSong.forEach(buttonFavoriteSong => {
     buttonFavoriteSong.addEventListener("click", () => {
+      const isUser = buttonFavoriteSong.getAttribute("data-user");
+      if (!isUser) {
+        window.location.href = "/users/login";
+        return;
+      }
+
       const id = buttonFavoriteSong.getAttribute("button-favorite");
       const isActive = buttonFavoriteSong.classList.contains("active");
       const typeFavorite = isActive ? "unfavorite" : "favorite"
@@ -93,8 +105,8 @@ if (listFavoriteSong) {
         });
     });
   });
-
 }
+
 // End Button favorite
 
 // Search Suggest
