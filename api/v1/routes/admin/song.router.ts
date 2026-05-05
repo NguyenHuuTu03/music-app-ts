@@ -1,8 +1,6 @@
 import { Router } from "express";
 import * as controller from "../../controllers/admin/song.controllers";
 import * as uploadMiddleware from "../../../../middleware/admin/upload.middleware";
-// import { v2 as cloudinary } from "cloudinary";
-// import streamifier from "streamifier";
 import multer from "multer";
 const upload = multer();
 
