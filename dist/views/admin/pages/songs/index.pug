@@ -1,0 +1,56 @@
+extends ../../layouts/default.pug
+
+block main
+  .page-header
+    h2.inner-title Danh sách bài hát
+    a.btn.btn-primary(href= prefixAdmin + "/songs/create")
+      i.bi.bi-plus-lg
+      span Thêm mới
+
+  .card
+    .card-body
+      table.adm-table
+        thead
+          tr
+            th STT
+            th Ảnh
+            th Tiêu đề
+            th Ca sĩ
+            th Chủ đề
+            th Trạng thái
+            th Hoạt động
+        tbody
+          if songs && songs.length > 0
+            each song, index in songs
+              tr
+                td #{index + 1}
+                td
+                  if song.avatar
+                    img(src= song.avatar, alt= song.title, style="width:44px; height:44px; object-fit:cover; border-radius:8px; border:1px solid var(--border)")
+                  else
+                    .no-img
+                      i.bi.bi-image
+                td #{song.title}
+                td #{song.infoSinger.fullName}
+                td #{song.infoTopic.title}
+                td
+                  if song.status === "active"
+                    button.status-btn.status-active
+                      i.bi.bi-check-circle-fill
+                      |  Hoạt động
+                  else
+                    button.status-btn.status-inactive
+                      i.bi.bi-x-circle-fill
+                      |  Dừng hoạt động
+                td.action-cell
+                  a.btn.btn-sm.btn-secondary(href= prefixAdmin + `/songs/detail/${song._id}`, title="Chi tiết")
+                    i.bi.bi-eye
+                  a.btn.btn-sm.btn-secondary(href= prefixAdmin + `/songs/edit/${song._id}`, title="Sửa")
+                    i.bi.bi-pencil
+                  a.btn.btn-sm.btn-danger(href= prefixAdmin + `/songs/delete/${song._id}`, title="Xóa")
+                    i.bi.bi-trash
+          else
+            tr
+              td(colspan="5", style="text-align:center; padding:40px; color:var(--muted)")
+                i.bi.bi-inbox(style="font-size:28px; display:block; margin-bottom:8px; opacity:.4")
+                | Chưa có topic nào

@@ -1,0 +1,43 @@
+header.header.py-3
+  .container
+    .row.align-items-center
+
+      .col-3
+        .inner-logo
+          a(href="/")
+            img(src="/client/images/logo.jpg", alt="Logo", height="40")
+
+      .col-9
+        .inner-menu.d-flex.justify-content-end.align-items-center
+          
+          // Search form
+          div(class="box-search")
+            form.search-form(action="/search/result" method="GET")
+              i.fa-solid.fa-magnifying-glass.search-icon
+              input.search-input(
+                type="text"
+                name="keyword"
+                placeholder="Tìm kiếm bài hát..."
+                autocomplete="off"
+                value=keyword
+              )
+              button.search-btn(type="submit")
+                i.fa-solid.fa-arrow-right
+            .search-suggest
+              .suggest-list
+
+          ul.d-flex.list-unstyled.mb-0.ms-4
+            li
+              a(href="/") Trang chủ
+            li
+              a(href="/topics") Chủ đề
+            li
+              a(href="/favorite-songs") Yêu thích
+            if(user)
+              li
+                a.btn-logout(href="/users/logout")
+                  i.fa-solid.fa-right-from-bracket
+                  |  Đăng xuất
+            else
+              li
+                a.btn-register(href="/users/register") Đăng ký

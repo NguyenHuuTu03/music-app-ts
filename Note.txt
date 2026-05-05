@@ -1,1 +1,2 @@
 - npm i unidecode // thư viện bỏ đi các dấu của từ khi tìm kiếm theo slug
+- npm i --save-dev fs-extra // thư viện để 

@@ -1,0 +1,33 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.my-4
+    .row
+      .col-12
+        +box-head(pageTitle)
+    
+    .row
+      each song in songs
+        .col-6.mb-3
+          .song-item
+            .inner-image
+              a(href=`/songs/detail/${song.infoSong.slug}`)
+                img(src=song.infoSong.avatar)
+
+            .inner-content
+              .inner-title
+                a(href=`/songs/detail/${song.infoSong.slug}`)= song.infoSong.title
+
+              .inner-singer
+                i.fa-solid.fa-microphone-lines
+                |  #{song.infoSinger ? song.infoSinger.fullName : "Không rõ"}
+
+              div(class="inner-action inner-heart active" button-favorite=song.infoSong.id)
+                i.fa-regular.fa-heart
+                | Yêu thích
+
+              .inner-time
+                i.fa-regular.fa-clock
+                |  Hôm nay
+              

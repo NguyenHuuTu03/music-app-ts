@@ -1,0 +1,16 @@
+header.adm-header
+  a.adm-brand(href= prefixAdmin + "/dashboard")
+    .brand-icon: i.bi.bi-music-note-beamed
+    span.brand-name Music Admin
+  .header-right
+    .btn-icon: i.bi.bi-bell
+    if user
+      .user-pill
+        .user-avatar #{user.fullName.charAt(0)}
+        span.user-name #{user.fullName}
+        i.bi.bi-chevron-down
+      a.btn-icon(href= prefixAdmin + "/auth/logout"): i.bi.bi-box-arrow-right
+    else
+      a.btn-login(href= prefixAdmin + "/auth/login")
+        i.bi.bi-box-arrow-in-right
+        span Đăng nhập
